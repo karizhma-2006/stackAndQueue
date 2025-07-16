@@ -1,0 +1,7 @@
+Function	    Description
+q.push(x)  -Adds x to the back (enqueue)
+q.pop()	   -Removes front element (dequeue)
+q.front()	 -Returns front element
+q.back()	 -Returns rear (last) element
+q.empty()	 -Checks if queue is empty
+q.size()	 -Returns number of elements
