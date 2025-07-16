@@ -1,0 +1,104 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+class QueueStack {
+private:
+    queue<int> q1, q2;
+
+public:
+    // Push element onto stack
+    void push(int x) {
+        q2.push(x);  // Step 1: Push to q2
+
+        // Step 2: Push all elements from q1 to q2
+        while (!q1.empty()) {
+            q2.push(q1.front());
+            q1.pop();
+        }
+
+        // Step 3: Swap q1 and q2
+         while(!q2.empty())
+        {
+            q1.push(q2.front());
+            q2.pop();
+        }
+    }
+
+    // Pop the top element from the stack
+    int pop() {
+        if (q1.empty()) {
+            cout << "Stack underflow\n";
+            return -1;
+        }
+        int top = q1.front();
+        q1.pop();
+        return top;
+    }
+
+    // Peek top element
+    int top() {
+        if (q1.empty()) {
+            cout << "Stack is empty\n";
+            return -1;
+        }
+        return q1.front();
+    }
+
+    // Check if stack is empty
+    bool empty() {
+        return q1.empty();
+    }
+
+    // Display all elements
+    void display() {
+        if (q1.empty()) {
+            cout << "Stack is empty\n";
+            return;
+        }
+
+        cout << "Stack elements (top to bottom): ";
+        queue<int> temp = q1;
+        while (!temp.empty()) {
+            cout << temp.front() << " ";
+            temp.pop();
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    QueueStack s;
+    int choice, val;
+
+    while (true) {
+        cout << "\n1. Push\n2. Pop\n3. Top\n4. Display\n5. Exit\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            cout << "Enter value to push: ";
+            cin >> val;
+            s.push(val);
+            break;
+        case 2:
+            val = s.pop();
+            if (val != -1)
+                cout << "Popped: " << val << endl;
+            break;
+        case 3:
+            val = s.top();
+            if (val != -1)
+                cout << "Top element: " << val << endl;
+            break;
+        case 4:
+            s.display();
+            break;
+        case 5:
+            cout << "Exiting...\n";
+            return 0;
+        default:
+            cout << "Invalid choice. Try again.\n";
+        }
+    }
+}
