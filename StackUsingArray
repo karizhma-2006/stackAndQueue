@@ -1,0 +1,106 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+int top=-1;
+# define MAX 1000
+
+class Stack
+{
+        int stack[MAX];
+    public:
+        void isfull()
+        {
+         if(top>=MAX-1)
+            cout<<"stack is full";
+        else
+            cout<<"stack is not full";
+        }
+        void isempty()
+        {
+            if(top==-1)
+                cout<<"stack is empty";
+            else
+                cout<<"stack is not empty";
+        }
+        void push(int value)
+        {
+            if(top>=MAX-1)
+                cout<<"stack overflow";
+            else
+                {
+                    stack[++top]=value;
+                }
+        }
+        void pop()
+        {
+            if(top==-1)
+                cout<<"stack unserflow";
+            else
+            {
+                cout<<stack[top--]<<"poped out";
+            }
+        }
+        int peek()
+        {
+            if(top==-1)
+            {
+                cout<<"stack is empty";
+                return 0;
+            }
+            else
+                return stack[top];
+        }
+        void display()
+        {
+            cout<<"elements in stack :";
+            for(int i=top;i>=0;i--)
+            {
+                cout<<stack[i]<<" ";//peek();
+            }
+        }
+};
+int main() {
+    class Stack s;
+     int ch,n=1,value;
+    while(n)
+    {
+        printf("\n1.isfull");
+         printf("\n2.isempty");
+          printf("\n3.push");
+         printf("\n4.pop");
+         printf("\n5.peek");
+          printf("\n6.display");
+           printf("\n7.exit");
+        printf("\nenter choice");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+             s.isfull();
+             break;
+            case 2:
+                s.isempty();
+                break;
+            case 3:
+            cout<<"enter value to push";
+            cin>>value;
+                s.push(value);
+                break;
+            case 4:
+                s.pop();
+                break;
+            case 5:
+                value=s.peek();
+                cout<<value<<"is peeked";
+                break;
+            case 6:
+                s.display();
+                break;
+            case 7:
+                exit(0);
+                break;
+                
+        }
+    }
+    return 0;
+}
