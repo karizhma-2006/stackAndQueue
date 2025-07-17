@@ -1,0 +1,29 @@
+https://www.geeksforgeeks.org/problems/queue-using-stack/1
+// User function Template for C++
+
+class Queue {
+    stack<int> input, output;
+
+  public:
+    void enqueue(int x) {
+        // code hereout
+        while(!output.empty())
+        {
+       input.push(output.top());
+       output.pop();
+        }
+       output.push(x);
+       while(!input.empty())
+       {
+       output.push(input.top());
+       input.pop();
+       }
+    }
+
+    int dequeue() {
+        int x=output.top();
+        output.pop();
+        return x;
+        // code here
+    }
+};
