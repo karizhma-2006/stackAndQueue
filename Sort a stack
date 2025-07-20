@@ -1,6 +1,9 @@
 https://www.geeksforgeeks.org/dsa/sort-stack-using-temporary-stack/
 
-//1.using 2 stacks-o(n^2)  note:while using stack be very careful bec the major mistake u have done here isusing same stack s entirely in ur code and s.size() using entirely in ur code bec the stack s will be changing in ur code and its size also will be changing
+//1.using 2 stacks-o(n^2)  note:while using stack be very careful bec the major mistake u have done here isusing same stack s entirely in ur code and 
+s.size() using entirely in ur code bec the stack s will be changing in ur code and its size also will be changing
+i.e 1.Modifying stack in a loop without backup loses data Use a temporary stack or store in a vector
+2.Use stack<int>& s to pass by reference
 /*The structure of the class is
 class SortedStack{
 public:
