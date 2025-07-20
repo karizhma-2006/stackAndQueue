@@ -1,0 +1,89 @@
+https://www.geeksforgeeks.org/dsa/sort-stack-using-temporary-stack/
+
+//1.using 2 stacks-o(n^2)  note:while using stack be very careful bec the major mistake u have done here isusing same stack s entirely in ur code and s.size() using entirely in ur code bec the stack s will be changing in ur code and its size also will be changing
+/*The structure of the class is
+class SortedStack{
+public:
+    stack<int> s;
+    void sort();
+};
+*/
+
+/* The below method sorts the stack s
+you are required to complete the below method */
+stack<int>temp;
+int getindex(stack<int>&s)
+{
+    stack<int>b;
+     int size=s.size();
+    int minval=INT_MIN,index=-1;
+    for(int i=size-1;i>=0;i--)
+    {
+        int curr=s.top();
+        s.pop();
+        if(curr>=minval )
+        {
+            minval=curr;
+            index=i;
+         
+        }
+        b.push(curr);
+    }
+    while(!b.empty())
+    {
+        s.push(b.top());
+        b.pop();
+    }
+    return index;
+}
+void insertval(stack<int>&s,int minindex)
+{
+    int minval,size=s.size();
+    stack<int>b;
+    for(int i=size-1;i>=0;i--)
+    {
+        int curr=s.top();
+        s.pop();
+        if(i!=minindex)
+            b.push(curr);
+        else
+            minval=curr;
+    }
+    temp.push(minval);
+    while(!b.empty())
+    {
+        s.push(b.top());
+        b.pop();
+    }
+}
+
+void SortedStack::sort() {
+   int n=s.size();
+    for(int i=0;i<n;i++)
+    {
+        int minindex=getindex(s);
+        insertval(s,minindex);
+    }
+    while(!temp.empty())
+    {
+        s.push(temp.top());
+        temp.pop();
+    }
+    
+}
+
+//2.using extra space
+void SortedStack ::sort() {
+    // Your code here
+    vector<int>a;
+   while(!s.empty())
+   {
+        a.push_back(s.top());
+        s.pop();
+   }
+    std::sort(a.begin(),a.end());
+    for(int i=0;i<a.size();i++)
+    {
+        s.push(a[i]);
+    }
+}
