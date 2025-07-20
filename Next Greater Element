@@ -24,3 +24,73 @@ class Solution {
         return res;
     }
 };
+//2.optimized sol-using stack(o(n))
+class Solution {
+  public:
+    vector<int> nextLargerElement(vector<int>& arr) {
+        // code here
+        int res[arr.size()];
+        stack<int>s,b;
+        s.push(arr[0]),b.push(0);
+        for(int i=1;i<arr.size();i++)
+        {
+            if(arr[i]>s.top())
+            {
+                while(!s.empty() && arr[i]>s.top() )
+                {
+                    res[b.top()]=arr[i];
+                    s.pop();
+                    b.pop();
+                }
+            }
+            s.push(arr[i]);
+            b.push(i);
+        }
+        while(!s.empty())
+        {
+            res[b.top()]=-1;
+            b.pop();
+            s.pop();
+        }
+        vector<int>r;
+        for(int i=0;i<arr.size();i++)
+        {
+            r.push_back(res[i]);
+        }
+        return r;
+    }
+};
+
+//3.slight change to know how vector can initialize
+class Solution {
+  public:
+    vector<int> nextLargerElement(vector<int>& arr) {
+        // code here
+        int n=arr.size();
+        vector<int>res(n,-1);//only after initialising u can assign res[b.top()]=arr[i] like this using index
+        stack<int>s,b;
+        s.push(arr[0]),b.push(0);
+        for(int i=1;i<arr.size();i++)
+        {
+            if(arr[i]>s.top())
+            {
+                while(!s.empty() && arr[i]>s.top() )
+                {
+                    res[b.top()]=arr[i];
+                    s.pop();
+                    b.pop();
+                }
+            }
+            s.push(arr[i]);
+            b.push(i);
+        }
+        while(!s.empty())
+        {
+            res[b.top()]=-1;
+            b.pop();
+            s.pop();
+        }
+        
+        return res;
+    }
+};
